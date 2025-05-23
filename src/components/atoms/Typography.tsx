@@ -2,7 +2,6 @@ import React from "react";
 
 type variants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body" | "span";
 type colors = "blue" | "red" | "green" | "white" | "black" | "gray";
-
 interface TypographyProps {
   variant?: variants;
   color?: colors;

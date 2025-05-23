@@ -1,60 +1,111 @@
 "use client";
-import { InputForm } from "@/components/molecules/InputForm";
-import Table from "@/components/molecules/Table";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import Docker from "@/public/svg/docker-logo-white.svg";
+import DockerBlue from "@/public/svg/docker-logo-blue.svg";
+import Typography from "@/components/atoms/Typography";
+import Button from "@/components/atoms/Button";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  const [data, setData] = useState<{ id: number; value: string }[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    setLoading(true);
-    const res = await fetch("/api/data");
-    const json = await res.json();
-    setData(json);
-    setLoading(false);
-  };
-
-  const addData = async (value: string) => {
-    const res = await fetch("/api/data", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ value }),
-    });
-    if (res.ok) {
-      fetchData();
-    }
-  };
-
-  const deleteData = async (id: number) => {
-    await fetch("/api/data", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
-    });
-    fetchData();
+  const handleRedirect = (url: string) => {
+    redirect(url);
   };
 
   return (
-    <div className="flex flex-col bg-gradient-to-r from-cyan-500 to-blue-500 items-center gap-10 p-10 w-screen h-screen">
-      <header className="w-full flex justify-start">
-        <div className="bg-white px-6 py-2 rounded-2xl">
-          <h1 className="text-5xl font-semibold text-black">
-            NEXTJS CRUD (SSR)
-          </h1>
-        </div>
+    <div className="flex flex-col bg-gradient-to-r from-[#1f62ec] to-[#022a8e] items-center gap-10 pt-10 h-screen">
+      <header>
+        <Image src={Docker} alt="" className="max-w-44" />
       </header>
-      <main className="flex flex-col gap-10 p-20 items-center w-11/12 h-full bg-gradient-to-br from-sky-200 to-blue-600 rounded-2xl shadow-2xl">
-        <InputForm onAdd={addData} />
-        {loading ? (
-          <div className="text-white">Cargando...</div>
-        ) : (
-          <Table data={data} onDelete={deleteData} className="w-8/12" />
-        )}
+      <main className="flex flex-col items-center w-full h-full bg-white shadow-2xl ">
+        <section className="flex flex-col gap-10 items-center w-full py-24 bg-[#f4f4f6] rounded-b-[12rem]">
+          <Typography variant="h1" className="text-7xl">
+            Bienvenidos al curso de Docker
+          </Typography>
+          <Typography variant="h4">
+            Atravete a aprender esta increible tecnologia
+          </Typography>
+
+          <div className="flex gap-5 justify-between">
+            <Button
+              bgColor="white"
+              color="black"
+              text="Leer sobre docker ✨"
+              className=" font-semibold px-4 border-2 border-gray-400 hover:shadow-md hover:shadow-gray-400"
+              onClick={() => handleRedirect("https://docs.docker.com/")}
+            />
+
+            <Button
+              bgColor="blue"
+              color="white"
+              text="🚀 Vamos a aprender"
+              className="bg-[#1d63ed] font-semibold px-4 hover:shadow-md hover:shadow-sky-400 "
+              onClick={() => handleRedirect("/aprende")}
+            />
+          </div>
+        </section>
+
+        <section className="grid grid-cols-3 grid-rows-2 gap-6 w-3/6 mt-10">
+          <div className="flex flex-col items-center bg-[#e6f0fd] rounded-xl p-6 shadow-md">
+            <Image src={DockerBlue} alt="" className="max-w-16 mb-4" />
+            <Typography variant="h5" className="font-bold mb-2">
+              Portabilidad
+            </Typography>
+            <Typography variant="body" className="text-center text-gray-700">
+              Docker permite ejecutar aplicaciones en cualquier entorno,
+              asegurando que funcionen igual en desarrollo y producción.
+            </Typography>
+          </div>
+          <div className="flex flex-col items-center bg-[#e6f0fd] rounded-xl p-6 shadow-md">
+            <Image src={DockerBlue} alt="" className="max-w-16 mb-4" />
+            <Typography variant="h5" className="font-bold mb-2">
+              Aislamiento
+            </Typography>
+            <Typography variant="body" className="text-center text-gray-700">
+              Cada contenedor es independiente, evitando conflictos entre
+              aplicaciones y facilitando la gestión de dependencias.
+            </Typography>
+          </div>
+          <div className="flex flex-col items-center bg-[#e6f0fd] rounded-xl p-6 shadow-md">
+            <Image src={DockerBlue} alt="" className="max-w-16 mb-4" />
+            <Typography variant="h5" className="font-bold mb-2">
+              Escalabilidad
+            </Typography>
+            <Typography variant="body" className="text-center text-gray-700">
+              Facilita la creación y gestión de múltiples instancias de una
+              aplicación para adaptarse a la demanda.
+            </Typography>
+          </div>
+          <div className="flex flex-col items-center bg-[#e6f0fd] rounded-xl p-6 shadow-md">
+            <Image src={DockerBlue} alt="" className="max-w-16 mb-4" />
+            <Typography variant="h5" className="font-bold mb-2">
+              Eficiencia
+            </Typography>
+            <Typography variant="body" className="text-center text-gray-700">
+              Optimiza el uso de recursos al compartir el mismo sistema
+              operativo, reduciendo el consumo comparado con máquinas virtuales.
+            </Typography>
+          </div>
+          <div className="flex flex-col items-center bg-[#e6f0fd] rounded-xl p-6 shadow-md">
+            <Image src={DockerBlue} alt="" className="max-w-16 mb-4" />
+            <Typography variant="h5" className="font-bold mb-2">
+              Integración continua
+            </Typography>
+            <Typography variant="body" className="text-center text-gray-700">
+              Facilita la automatización de pruebas y despliegues, integrándose
+              fácilmente con herramientas de CI/CD.
+            </Typography>
+          </div>
+          <div className="flex flex-col items-center bg-[#e6f0fd] rounded-xl p-6 shadow-md">
+            <Image src={DockerBlue} alt="" className="max-w-16 mb-4" />
+            <Typography variant="h5" className="font-bold mb-2">
+              Rapidez en despliegues
+            </Typography>
+            <Typography variant="body" className="text-center text-gray-700">
+              Permite iniciar y detener aplicaciones rápidamente, acelerando los
+              ciclos de desarrollo y entrega.
+            </Typography>
+          </div>
+        </section>
       </main>
     </div>
   );
