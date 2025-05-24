@@ -4,11 +4,13 @@ import Docker from "@/public/svg/docker-logo-white.svg";
 import DockerBlue from "@/public/svg/docker-logo-blue.svg";
 import Typography from "@/components/atoms/Typography";
 import Button from "@/components/atoms/Button";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const route = useRouter();
+
   const handleRedirect = (url: string) => {
-    redirect(url);
+    route.push(url);
   };
 
   return (
@@ -16,7 +18,7 @@ export default function Home() {
       <header>
         <Image src={Docker} alt="" className="max-w-44" />
       </header>
-      <main className="flex flex-col items-center w-full h-full bg-white shadow-2xl ">
+      <main className="flex flex-col items-center w-full  bg-white shadow-2xl ">
         <section className="flex flex-col gap-10 items-center w-full py-24 bg-[#f4f4f6] rounded-b-[12rem]">
           <Typography variant="h1" className="text-7xl">
             Bienvenidos al curso de Docker
@@ -31,7 +33,7 @@ export default function Home() {
               color="black"
               text="Leer sobre docker ✨"
               className=" font-semibold px-4 border-2 border-gray-400 hover:shadow-md hover:shadow-gray-400"
-              onClick={() => handleRedirect("https://docs.docker.com/")}
+              onClick={() => handleRedirect("https://docs.docker.com")}
             />
 
             <Button

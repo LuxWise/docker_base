@@ -12,7 +12,7 @@ interface buttonProps {
 }
 
 const bgColors: Record<bgColors, string> = {
-  blue: "bg-sky-500",
+  blue: "bg-[#1d63ed]",
   green: "bg-green-600",
   red: "bg-red-500",
   white: "bg-white",
